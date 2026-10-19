@@ -1,26 +1,31 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* Style 3 choisi par Tao : noir profond + vert citron, sportif et percutant */
+  --color-ink: #111412;
+  --color-ink-2: #1a1e1b;
+  --color-line: #2a2f2b;
+  --color-chalk: #f4f6f2;
+  --color-mute: #9aa39d;
+  --color-soft: #cdd3ce;
+  --color-lime: #d7f25a;
+  --color-lime-deep: #b9d63a;
+  --color-danger: #ff8a7a;
+
+  --font-display: var(--font-titre), "Arial Narrow", sans-serif;
+  --font-sans: var(--font-corps), system-ui, sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Tout le CSS maison vit dans un @layer (piège Tailwind v4 : sinon les marges tombent à zéro) */
+@layer base {
+  html { scroll-behavior: smooth; }
+  body { background: var(--color-ink); color: var(--color-chalk); }
+  ::selection { background: var(--color-lime); color: var(--color-ink); }
+  details > summary { list-style: none; cursor: pointer; }
+  details > summary::-webkit-details-marker { display: none; }
+  details[open] .plus { transform: rotate(45deg); }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { transition: none !important; }
   }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
 }
